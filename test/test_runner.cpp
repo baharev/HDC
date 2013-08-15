@@ -18,64 +18,62 @@ namespace hdc {
 namespace test {
 
 test_runner::~test_runner() {
-	// out of line dtor due to incomplete type test_base
+    // out of line dtor due to incomplete type test_base
 }
 
 test_runner::test_runner(int argc, char* argv[]) {
 
-	args = {argv, argv+argc};
+    args = {argv+1, argv+argc};
 
-	add_all_tests();
+    add_all_tests();
 
-	run();
+    run();
 }
 
 void test_runner::run() {
 
-	if (args.size() < 2) {
+    if (!args.empty()) {
 
-		for (auto&& t : tests) {
-			cout << t.first << endl;
-		}
-	}
-	else {
+        run_test(args.at(0));
+    }
+    else {
 
-		run_test(args.at(1));
-	}
+        for (auto&& t : tests) {
+            cout << t.first << endl;
+        }
+    }
 }
 
 void test_runner::run_test(const string& name) {
 
-	cout << "Running test " << name << endl;
+    cout << "Running test " << name << endl;
 
-	auto test = tests.find(name);
+    auto test = tests.find(name);
 
-	if (test==tests.end()) {
+    if (test!=tests.end()) {
 
-		cout << "Error: test not found!";
-	}
-	else {
+        test->second->run();
+    }
+    else {
 
-		test->second->run();
-	}
+        cout << "Error: test not found!";
+    }
 }
 
 //------------------------------------------------------------------------------
 
 template<typename T, typename ... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
-	return std::unique_ptr<T> (new T(std::forward<Args>(args)...));
+    return std::unique_ptr<T> (new T(std::forward<Args>(args)...));
 }
 
 void test_runner::add_all_tests() {
 
-	pair<string,unique_ptr<test_base>> test_array[] = {
+    pair<string,unique_ptr<test_base>> test_array[] = {
 #include "test_classes"
-	};
+    };
 
-	tests.insert(make_move_iterator(begin(test_array)),
-			     make_move_iterator(end(test_array)));
-
+    move(begin(test_array), end(test_array), inserter(tests, tests.end()));
 }
 
 } // namespace test

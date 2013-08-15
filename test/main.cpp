@@ -2,6 +2,6 @@
 
 int main(int argc, char* argv[]) {
 
-	hdc::test::test_runner runner(argc, argv);
+    hdc::test::test_runner run(argc, argv);
 
 }

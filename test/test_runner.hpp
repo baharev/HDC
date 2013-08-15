@@ -23,21 +23,21 @@ class test_runner {
 
 public:
 
-	test_runner(int argc, char* argv[]);
+    test_runner(int argc, char* argv[]);
 
-	~test_runner();
+    ~test_runner();
 
 private:
 
-	void add_all_tests();
+    void add_all_tests();
 
-	void run();
+    void run();
 
-	void run_test(const std::string& name);
+    void run_test(const std::string& name);
 
-	std::vector<std::string> args;
+    std::vector<std::string> args;
 
-	std::map<std::string,std::unique_ptr<test_base>> tests;
+    std::map<std::string,std::unique_ptr<test_base>> tests;
 
 };
 

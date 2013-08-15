@@ -14,9 +14,9 @@ class test_base {
 
 public:
 
-	virtual void run() = 0;
+    virtual void run() = 0;
 
-	virtual ~test_base() { }
+    virtual ~test_base() { }
 
 private:
 

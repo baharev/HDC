@@ -16,7 +16,7 @@ class tangent_plane: public test_base {
 
 public:
 
-	virtual void run() override;
+    virtual void run() override;
 
 private:
 

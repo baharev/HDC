@@ -12,7 +12,7 @@ namespace hdc {
 namespace test {
 
 void tangent_plane::run() {
-	std::cout << "Running tangent plane test!" << std::endl;
+    std::cout << "Running tangent plane test!" << std::endl;
 }
 
 }
