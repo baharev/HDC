@@ -1,0 +1,2 @@
+{ "tangent_plane", make_unique<tangent_plane>() },
+{ "projection", make_unique<projection>() }
